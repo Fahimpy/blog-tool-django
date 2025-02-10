@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Tools list | KeyboardWorld {% endblock %}
+{% block meta_title %} Exclusive Tools for checking your PC {% endblock %}
+{% block meta_description %} This is the meta description of tools list page. {% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+<div class="text-center">
+  <h2 class="mx-auto" style="margin-top: 10px;">All Tools List</h2>
+</div>
+<div class="row">
+    
+    {% for tool in tools %}
+    <div class="col-sm-6">
+      <a href="{% url 'single_tool' tool.slug %}"><div class="card">
+        <div class="card-body">
+          {% if tool.image %}
+          <img src="{{tool.image.url}}" class="img-fluid" alt="{{tool.name}}">
+          {% endif %}
+          <h3 class="card-title">{{tool.name}}</h3>
+          <p class="card-text">{{tool.intro|safe}}</p>
+        </div>
+      </div></a>
+    </div>
+   {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{tool.name}}{% endblock %}
+{% block meta_title %}{{tool.meta_title}}{% endblock %}
+{% block meta_description %}{{tool.meta_description}}{% endblock %}
+
+{% block content %}
+<section class="single-block-wrapper section-padding">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+				<div class="single-post">
+    <div class="post-header mb-5 text-center">
+        <h2 class="post-title mt-2">
+            {{tool.name}}
+        </h2>
+
+        <div class="post-meta">
+            <span class="text-uppercase font-sm letter-spacing-1 mr-3">by Nicholas Harte</span>
+            <span class="text-uppercase font-sm letter-spacing-1">{{tool.modified_time|date:"F d, Y"}}</span>
+        </div>
+        <div class="row justify-content-center">
+            {{tool.intro|safe}}
+        </div>
+        <div class="post-thumbnail mt-4">
+            {% if tool.image %}
+            <img src="{{tool.image.url}}" alt="{{tool.name}}" class="img-fluid">
+            {% endif %}
+            <div class="row justify-content-center">
+            {{tool.custom_body_html|safe}}
+        </div>
+    </div>
+    <div class="post-body">
+        <div class="entry-content">
+            {{tool.content|safe}}
+        </div>
+            
+    </div>
+    {{tool.custom_footer_html|safe}}
+</div>
+				
+				<div class="related-posts-block mt-5">
+    <h3 class="news-title mb-4 text-center">
+       You May Also Search some tools
+    </h3>
+    <div class="row">
+        
+        {% for related in related_tools %}
+        <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="post-block-wrapper mb-4 mb-lg-0">
+                <div class="post-content mt-3">
+                    <h5 >
+                        <a href="{% url 'single_tool' related.slug}">{{tool.title}}</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+
+{% endblock %}

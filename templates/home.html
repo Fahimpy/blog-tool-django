@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block meta_title %}HOme Meta title{% endblock %}
+{% block meta_description %}Home meta description{% endblock %}
+{% block content %}
+    
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+    
+    
+                    {% for blog in blogs %}
+    <div class="col-lg-4 col-md-6 col-sm-6">
+        
+        <article class="post-grid mb-5 ">
+            <a class="post-thumb mb-4 d-block" href="{% url 'single_blog' blog.slug %}">
+                <img src="{% if blog.image %}{{blog.image.url}}{% endif %}" alt="{{Blog.title}}" class="img-fluid w-100">
+            </a>
+
+            <div class="post-content-grid">
+                <div class="label-date">
+                    <span class="day">{{ blog.modified_at|date:"d" }}</span>
+                    <span class="month text-uppercase">{{ blog.modified_at|date:"M" }}</span>
+                </div>
+                <span class="cat-name text-color font-extra font-sm text-uppercase letter-spacing">{{blog.category.name}}</span>
+                <h2 class="post-title mt-1"><a href="{% url 'single_blog' blog.slug %}">{{blog.title}}</a></h2>
+                <div>
+                    {{blog.content|safe|striptags|truncatewords:30 }}
+                </div>
+            </div>
+        </article>
+       
+    </div>
+    {% endfor %}
+
+    
+
+</div>
+            </div>
+
+            <div class="m-auto">
+                <div class="pagination mt-5 pt-4">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="#" class="active">1</a></li>
+                        <li class="list-inline-item"><a href="#">2</a></li>
+                        <li class="list-inline-item"><a href="#">3</a></li>
+                        <li class="list-inline-item"><a href="#" class="prev-posts"><i class="ti-arrow-right"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

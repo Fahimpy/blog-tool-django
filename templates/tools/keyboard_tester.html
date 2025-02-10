@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Tester with Latency</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .keyboard-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .key {
+            display: inline-block;
+            width: 70px;
+            height: 70px;
+            line-height: 20px;
+            margin: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            background: #ddd;
+            border-radius: 5px;
+            transition: all 0.2s ease-in-out;
+            padding: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .key.active {
+            background: #ffcc00;
+            transform: scale(1.1);
+            box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.8);
+        }
+
+        .key.special {
+            background: #ff6666;
+            color: white;
+        }
+
+        .key.spacebar {
+            width: 300px;
+        }
+
+        .counter, .latency {
+            font-size: 12px;
+            display: block;
+            margin-top: 5px;
+            color: #555;
+        }
+
+        #reset-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #reset-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Keyboard Tester with Latency Measurement</h1>
+    <p>Press any key to test</p>
+    <div class="keyboard-container" id="keyboard"></div>
+    <button id="reset-btn">Reset Keys</button>
+
+    <script>
+        let keyCounts = {}; // প্রতিটি কী প্রেসের সংখ্যা ট্র্যাক করতে
+        let keyPressTimes = {}; // প্রতিটি কী প্রেসের সময় স্টোর করার জন্য
+
+        document.addEventListener("keydown", function(event) {
+            let key = event.key.toLowerCase();
+            let keyDiv = document.getElementById(key);
+            let currentTime = performance.now(); // বর্তমান সময় (high precision)
+
+            if (!keyDiv) {
+                keyDiv = document.createElement("div");
+                keyDiv.id = key;
+                keyDiv.classList.add("key");
+                keyDiv.innerText = event.key;
+
+                // বিশেষ কী চিহ্নিত করা (Enter, Spacebar, Backspace)
+                if (key === " ") {
+                    keyDiv.classList.add("special", "spacebar");
+                    keyDiv.innerText = "Space";
+                } else if (key === "enter") {
+                    keyDiv.classList.add("special");
+                    keyDiv.innerText = "Enter";
+                } else if (key === "backspace") {
+                    keyDiv.classList.add("special");
+                    keyDiv.innerText = "Backspace";
+                }
+
+                document.getElementById("keyboard").appendChild(keyDiv);
+                keyCounts[key] = 0; // প্রথমবার প্রেস হলে কাউন্ট শুরু
+            }
+
+            keyCounts[key]++;
+            keyDiv.classList.add("active");
+
+            // প্রেস সংখ্যা দেখানো
+            let counter = keyDiv.querySelector(".counter");
+            if (!counter) {
+                counter = document.createElement("span");
+                counter.classList.add("counter");
+                keyDiv.appendChild(counter);
+            }
+            counter.innerText = `Press: ${keyCounts[key]}`;
+
+            // Latency গণনা
+            if (keyPressTimes[key]) {
+                let latency = currentTime - keyPressTimes[key]; // দুই প্রেসের সময়ের পার্থক্য
+                let latencySpan = keyDiv.querySelector(".latency");
+                if (!latencySpan) {
+                    latencySpan = document.createElement("span");
+                    latencySpan.classList.add("latency");
+                    keyDiv.appendChild(latencySpan);
+                }
+                latencySpan.innerText = `Latency: ${latency.toFixed(2)} ms`;
+            }
+
+            // বর্তমান প্রেসের সময় স্টোর করা
+            keyPressTimes[key] = currentTime;
+        });
+
+        document.addEventListener("keyup", function(event) {
+            let keyDiv = document.getElementById(event.key.toLowerCase());
+            if (keyDiv) {
+                keyDiv.classList.remove("active");
+            }
+        });
+
+        // Reset Button Functionality
+        document.getElementById("reset-btn").addEventListener("click", function() {
+            document.getElementById("keyboard").innerHTML = "";
+            keyCounts = {};
+            keyPressTimes = {};
+        });
+    </script>
+</body>
+</html>

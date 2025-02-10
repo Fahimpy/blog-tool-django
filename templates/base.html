@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="{% block meta_description %}{% endblock %}">
+    <meta name="author" content="first Name Last Name" />
+    {% if index %}
+    <meta name="robots" content="index, follow">
+    {% else %}
+    <meta name="robots" content="noindex, nofollow">
+    {% endif %}
+
+            <!-- Open Graph Meta Datas -->
+            <meta property="og:locale" content="en_US" />
+            <meta property="og:type" content="article" />
+            <meta property="og:title" content="Open Graph Meta Tags" />
+            <meta property="og:description" content="Make your content more clickable and shareable on social media." />
+            <meta property="og:url" content="webpage url" />
+            <meta property="og:site_name" content="My Website Name" />
+            <meta property="article:publisher" content="https://www.facebook.com/myuser" />
+            <meta property="article:published_time" content="2020-01-14T22:51:13+00:00" />
+            <meta property="article:modified_time" content="2021-06-29T16:52:29+00:00" />
+            <meta property="og:image" content="fb-open-graph-image.png" />
+            <meta property="og:image:width" content="1920" />
+            <meta property="og:image:height" content="Alter Tags" />
+            <meta property="og:image:alt" content="990" />
+            <meta property="og:image:type" content="image/png" />
+        
+    <!--Favicon-->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    
+    <!-- THEME CSS
+	================================================== -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}">
+    <!-- Themify -->
+    <link rel="stylesheet" href="{% static 'plugins/themify/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/slick-carousel/slick-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/slick-carousel/slick.css' %}">
+    <!-- Slick Carousel -->
+    <link rel="stylesheet" href="{% static 'plugins/owl-carousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/owl-carousel/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/magnific-popup/magnific-popup.css' %}">
+    <!-- manin stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <header class="header-top bg-dark py-4">
+      <div class="container">
+          <nav class="navbar navbar-expand-lg navigation menu-white">
+                <a class="navbar-brand" href="#">
+                  <img src="{% static 'images/logo-w.png' %}" alt="" class="img-fluid">
+                </a>
+    
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="ti-menu  text-white"></span>
+                </button>
+    
+                  <div class="collapse navbar-collapse" id="navbar-collapse">
+                      <ul class="menu navbar-nav ml-auto">
+                        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="{% url 'keyboard_tester' %}" class="nav-link">Keyword Checker</a></li>
+                        <li class="nav-item"><a href="{% url 'Tools_list' %}" class="nav-link">More Tools</a></li>
+                          <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+                          <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+                      </ul>
+                  <div class="text-lg-right search ml-4">
+                    <div class="search_toggle"><i class="ti-search text-white"></i></div> 
+                  </div>
+             </div>
+          </nav>
+      </div>
+    </header>
+    
+    <!--search overlay start-->
+      <div class="search-wrap">
+          <div class="overlay">
+              <form action="#" class="search-form">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-md-10 col-9">
+                              <input type="text" class="form-control" placeholder="Search..."/>
+                          </div>
+                          <div class="col-md-2 col-3 text-right">
+                              <div class="search_toggle toggle-wrap d-inline-block">
+                                  <i class="ti-close"></i>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+      <!--search overlay end-->
+
+      {% block content %}
+      
+      {% endblock %}
+
+
+
+<!--footer start-->
+<footer class="footer-section bg-grey">
+
+
+    <div class="container">
+        <div class="row">
+       
+            <div class="col-md-12 text-center">
+               <p class="copyright">© Copyright 2025 - Sitename. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--footer end-->
+
+<!-- THEME JAVASCRIPT FILES
+================================================== -->
+<!-- initialize jQuery Library -->
+<script src="{% static 'plugins/jquery/jquery.js' %}"></script>
+<!-- Bootstrap jQuery -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap/js/popper.min.js' %}"></script>
+<!-- Owl caeousel -->
+<script src="{% static 'plugins/owl-carousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'plugins/slick-carousel/slick.min.js' %}"></script>
+<script src="{% static 'plugins/magnific-popup/magnific-popup.js' %}"></script>
+<!-- Instagram Feed Js -->
+<script src="{% static 'plugins/instafeed-js/instafeed.min.js' %}"></script>
+<!-- Google Map -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+<script src="{% static 'plugins/google-map/gmap.js' %}"></script>
+<!-- main js -->
+<script src="{% static 'js/custom.js' %}"></script>
+
+
+</body>
+</html>

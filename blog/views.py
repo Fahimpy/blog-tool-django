@@ -2,12 +2,13 @@ from django.shortcuts import render, get_object_or_404
 from .models import Blog, Category
 from django.db.models import Count
 from django.core.paginator import Paginator
+from django.http import HttpResponse
 
 # Create your views here.
 
 def home(request):
     blogs = Blog.objects.all().order_by('-created_at')
-    paginator = Paginator(blogs, 10)
+    paginator = Paginator(blogs, 9)
     page_number = request.GET.get('page')
     page_blog = paginator.get_page(page_number)
     return render(request, 'home.html', { 'page_blog': page_blog})
@@ -40,3 +41,16 @@ def about(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+def robots_txt(request):
+    content = """User-agent: *
+Disallow: /admin/
+Disallow: /login/
+Disallow: /register/
+Disallow: /cart/
+Disallow: /checkout/
+Allow: /static/
+
+Sitemap: https://yourwebsite.com/sitemap.xml
+"""
+    return HttpResponse(content, content_type="text/plain")

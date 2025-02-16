@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog', 'tools',
+    'blog', 'tools', 'django.contrib.sites', 'django.contrib.sitemaps',
 ]
+
+SITE_ID = 1
 
 # CKEditor কনফিগারেশন
 CKEDITOR_CONFIGS = {
@@ -85,10 +87,21 @@ WSGI_APPLICATION = 'Website.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / "db.sqlite3",
+ #   }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / "db.sqlite3",
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'blogtooldb',  # Replace with your database name
+        'USER': 'postgres',  # Default PostgreSQL user
+        'PASSWORD': 'DB101@',  # Replace with your PostgreSQL password
+        'HOST': 'localhost',  # Running locally
+        'PORT': '5432',  # Default PostgreSQL port
     }
 }
 

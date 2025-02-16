@@ -18,7 +18,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from blog.views import home, contact, about
+from django.contrib.sitemaps.views import sitemap
+from blog.sitemaps import BlogSitemap, StaticSitemap, ToolsSitemap
+from blog.views import home, contact, about, robots_txt
+
+sitemaps = {
+    'blog': BlogSitemap,  # Blog URLs in sitemap
+    'static': StaticSitemap,  # Static pages
+    'tools': ToolsSitemap,  # Tools URLs in sitemap
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,7 +35,9 @@ urlpatterns = [
     path('', about, name='about'),
     path('', include('tools.urls')),
     path('', include('blog.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path("robots.txt", robots_txt, name="robots_txt"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

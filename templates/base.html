@@ -30,6 +30,29 @@
             <meta property="og:image:height" content="Alter Tags" />
             <meta property="og:image:alt" content="990" />
             <meta property="og:image:type" content="image/png" />
+
+        <!-- Used by Chrome, Firefox OS, and opera to change the browser address bar. -->
+        <!-- reference
+        https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
+        -->
+        <meta name="theme-color" content="#ccccc7">
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="white">
+        <meta name="color-scheme" content="dark light">
+
+        <link rel='dns-prefetch' href='//ajax.googleapis.com' />
+        <link href='https://fonts.gstatic.com' crossorigin='anonymous' rel='preconnect' />
+        <link href='https://ajax.googleapis.com' rel='preconnect' />
+
+        <!-- Preload  -->
+        <link rel="preload" as="image" imagesrcset="width=400%2Cheight=210%2Cfit"
+            imagesizes="(max-width: 1012px) 100vw, 1012px" />
+
+        <!--  Used by windows 8, 8.1, and 10 for the start menu tiles. -->
+        <meta name="msapplication-TileColor" content="#00aba9">
+        <meta name="msapplication-TileImage" content="icon-tile.png">
+
+        <!-- for ie 11 -->
+        <meta name="msapplication-config" content="content.xml" />
         
     <!--Favicon-->
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">

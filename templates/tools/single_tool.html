@@ -4,6 +4,29 @@
 {% block meta_title %}{{tool.meta_title}}{% endblock %}
 {% block meta_description %}{{tool.meta_description}}{% endblock %}
 
+{% block schema %}
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "{{ tool.name }}",
+        "description": "{{ tool.meta_description|default:tool.content|striptags|truncatewords:30 }}",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "All",
+        "url": "{{ request.build_absolute_uri }}",
+        "image": "{% if tool.image %}{{ tool.image.url }}{% else %}https://yourwebsite.com/static/images/default.jpg{% endif %}",
+        "datePublished": "{{ tool.created_at|date:'Y-m-d' }}",
+        "dateModified": "{{ tool.modified_at|date:'Y-m-d' }}",
+        "offers": {
+            "@type": "Offer",
+            "price": "0.00",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+{% endblock %}
+
 {% block content %}
 <section class="single-block-wrapper section-padding">
 	<div class="container">

@@ -4,6 +4,37 @@
 {% block meta_title %}{{blog.meta_title}}{% endblock %}
 {% block meta_description %}{{blog.meta_description}}{% endblock %}
 
+{% block schema %}
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "{{ blog.title }}",
+        "description": "{{ blog.meta_description|default:blog.content|striptags|truncatewords:30 }}",
+        "image": "{% if blog.image %}{{ blog.image.url }}{% else %}https://yourwebsite.com/static/images/default.jpg{% endif %}",
+        "author": {
+            "@type": "Person",
+            "name": "Admin"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Your Website Name",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://yourwebsite.com/static/images/logo.png"
+            }
+        },
+        "datePublished": "{{ blog.created_at|date:'Y-m-d' }}",
+        "dateModified": "{{ blog.modified_at|date:'Y-m-d' }}",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ request.build_absolute_uri }}"
+        }
+    }
+    </script>
+    
+{% endblock %}
+
 {% block content %}
 <section class="single-block-wrapper section-padding">
 	<div class="container">

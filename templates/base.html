@@ -42,12 +42,35 @@
     <link rel="stylesheet" href="{% static 'plugins/themify/css/themify-icons.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/slick-carousel/slick-theme.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/slick-carousel/slick.css' %}">
+    
     <!-- Slick Carousel -->
-    <link rel="stylesheet" href="{% static 'plugins/owl-carousel/owl.carousel.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'plugins/owl-carousel/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/owl-carousel/owl.theme.default.min.css' %}">
-    <link rel="stylesheet" href="{% static 'plugins/magnific-popup/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/magnific-popup/magnific-popup.css' %}"> -->
+    
     <!-- manin stylesheet -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Your Website Name",
+            "url": "https://yourwebsite.com",
+            "logo": "https://yourwebsite.com/static/images/logo.png",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+880 1234 567890",
+                "contactType": "customer service",
+                "areaServed": "US",
+                "availableLanguage": "English"
+            }
+        }
+    </script>
+        
+{% block schema %}
+{% endblock %}
+
 </head>
 <body>
 
@@ -125,19 +148,23 @@
 <!-- initialize jQuery Library -->
 <script src="{% static 'plugins/jquery/jquery.js' %}"></script>
 <!-- Bootstrap jQuery -->
-<script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}" defer></script>
 <script src="{% static 'plugins/bootstrap/js/popper.min.js' %}"></script>
+
 <!-- Owl caeousel -->
-<script src="{% static 'plugins/owl-carousel/owl.carousel.min.js' %}"></script>
+<!--  <script src="{% static 'plugins/owl-carousel/owl.carousel.min.js' %}"></script>
 <script src="{% static 'plugins/slick-carousel/slick.min.js' %}"></script>
-<script src="{% static 'plugins/magnific-popup/magnific-popup.js' %}"></script>
+<script src="{% static 'plugins/magnific-popup/magnific-popup.js' %}"></script> -->
+
 <!-- Instagram Feed Js -->
-<script src="{% static 'plugins/instafeed-js/instafeed.min.js' %}"></script>
+<!-- <script src="{% static 'plugins/instafeed-js/instafeed.min.js' %}"></script> -->
+
 <!-- Google Map -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
-<script src="{% static 'plugins/google-map/gmap.js' %}"></script>
+<!--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+<script src="{% static 'plugins/google-map/gmap.js' %}"></script> -->
+
 <!-- main js -->
-<script src="{% static 'js/custom.js' %}"></script>
+<script src="{% static 'js/custom.js' %}" async></script>
 
 
 </body>

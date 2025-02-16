@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Home{% endblock %}
-{% block meta_title %}HOme Meta title{% endblock %}
+{% block meta_title %}Home Meta title{% endblock %}
 {% block meta_description %}Home meta description{% endblock %}
 {% block content %}
     
@@ -12,7 +12,7 @@
                 <div class="row">
     
     
-                    {% for blog in blogs %}
+                    {% for blog in page_blog %}
     <div class="col-lg-4 col-md-6 col-sm-6">
         
         <article class="post-grid mb-5 ">
@@ -44,10 +44,29 @@
             <div class="m-auto">
                 <div class="pagination mt-5 pt-4">
                     <ul class="list-inline">
-                        <li class="list-inline-item"><a href="#" class="active">1</a></li>
-                        <li class="list-inline-item"><a href="#">2</a></li>
-                        <li class="list-inline-item"><a href="#">3</a></li>
-                        <li class="list-inline-item"><a href="#" class="prev-posts"><i class="ti-arrow-right"></i></a></li>
+                        {% if page_blog.has_previous %}
+                            <li class="list-inline-item">
+                                <a href="?page={{ blogs.previous_page_number }}" class="prev-posts">
+                                    <i class="ti-arrow-left"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+            
+                        {% for num in page_blog.paginator.page_range %}
+                            {% if blogs.number == num %}
+                                <li class="list-inline-item"><a href="?page={{ num }}" class="active">{{ num }}</a></li>
+                            {% else %}
+                                <li class="list-inline-item"><a href="?page={{ num }}">{{ num }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+            
+                        {% if page_blog.has_next %}
+                            <li class="list-inline-item">
+                                <a href="?page={{ blogs.next_page_number }}" class="prev-posts">
+                                    <i class="ti-arrow-right"></i>
+                                </a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ category.name }} - Category{% endblock %}
+{% block meta_title %}{{ category.meta_title }}{% endblock %}
+{% block meta_description %}{{ category.meta_description }}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="text-center mt-3">{{ category.name }}</h2>
+    <div class="row">
+        {% for blog in cat_blogs %}
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="card mb-2" style="min-height: 300px ;">
+                    {% if blog.image %}
+                        <img src="{{ blog.image.url }}" class="card-img-top" alt="{{ blog.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h3 class="card-title">{{ blog.title }}</h3>
+                        <p class="card-text">{{ blog.content|truncatewords:20|safe }}</p>
+                        <a href="{% url 'single_blog' blog.slug %}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center">No posts available in this category.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
